@@ -1,0 +1,12 @@
+title: Hindu Philosophy and Traditions
+description: An organized collection of articles on Hindu philosophy, Vedanta, cosmology, teachers, and modern traditions.
+lang: en-US
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+permalink: pretty
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
