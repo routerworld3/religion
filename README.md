@@ -60,3 +60,23 @@ description: A short summary of the article.
 ```liquid
 <a href="{{ '/new-topic/' | relative_url }}">New Topic</a>
 ```
+
+## Mermaid diagrams
+
+GitHub Pages uses Jekyll to turn fenced Markdown blocks into highlighted HTML code. It does not automatically execute Mermaid inside the published website. The shared `_layouts/default.html` file in this repository:
+
+1. Finds rendered `mermaid` code fences.
+2. Converts each fence into a Mermaid diagram container.
+3. Loads Mermaid in the browser.
+4. Calls `mermaid.run()` explicitly after the conversion.
+
+Keep diagrams in the Markdown files in this format:
+
+````markdown
+```mermaid
+flowchart LR
+    A[Start] --> B[Finish]
+```
+````
+
+After committing this fix, allow GitHub Pages to finish a new deployment, then hard-refresh the browser page.
