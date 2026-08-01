@@ -182,3 +182,7 @@ Simple formula:
 * **Dvaita:** God and soul are eternally different.
 * **Bhedābheda:** soul is both different and non-different from God.
 * **Achintya Bhedābheda:** this oneness/difference is real but beyond full human logic.
+
+<!-- Mermaid rendering: kept in the page so it works even if a theme overrides _layouts/default.html. -->
+<script defer src="https://cdn.jsdelivr.net/npm/mermaid@11.16.0/dist/mermaid.min.js"></script>
+<script defer src="{{ '/assets/js/render-mermaid.js' | relative_url }}"></script>

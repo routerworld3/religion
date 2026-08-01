@@ -892,3 +892,7 @@ That reversal—from **purify and then realize** to **realize and then complete 
 [15]: https://www.dadabhagwan.org/path-to-happiness/spiritual-science/pratikraman-asking-for-forgiveness/what-is-pratikraman/?utm_source=chatgpt.com "What is Pratikraman? | Asking for forgiveness with repentance"
 [16]: https://www.dadabhagwan.org/about/trimandir/lord-simandhar-swami/?utm_source=chatgpt.com "Lord Simandhar Swami | Living Tirthankar"
 [17]: https://plato.stanford.edu/entries/shankara/?utm_source=chatgpt.com "Śaṅkara - Stanford Encyclopedia of Philosophy"
+
+<!-- Mermaid rendering: kept in the page so it works even if a theme overrides _layouts/default.html. -->
+<script defer src="https://cdn.jsdelivr.net/npm/mermaid@11.16.0/dist/mermaid.min.js"></script>
+<script defer src="{{ '/assets/js/render-mermaid.js' | relative_url }}"></script>

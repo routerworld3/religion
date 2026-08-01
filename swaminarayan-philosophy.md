@@ -486,3 +486,7 @@ The more difficult question is:
 
 Supporters and critics answer that second question differently. Recognizing the difference between **spiritual equality**, **separate participation**, and **institutional equality** produces a more accurate and respectful understanding of the tradition.
 
+
+<!-- Mermaid rendering: kept in the page so it works even if a theme overrides _layouts/default.html. -->
+<script defer src="https://cdn.jsdelivr.net/npm/mermaid@11.16.0/dist/mermaid.min.js"></script>
+<script defer src="{{ '/assets/js/render-mermaid.js' | relative_url }}"></script>
