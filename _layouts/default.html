@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="{{ site.lang | default: 'en-US' }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
+    <meta name="description" content="{{ page.description | default: site.description | escape }}">
+    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="wrapper header-inner">
+        <a class="site-title" href="{{ '/' | relative_url }}">{{ site.title }}</a>
+        <nav aria-label="Primary navigation">
+          <a href="{{ '/' | relative_url }}">Home</a>
+          <a href="{{ '/hindu-philosophy-schools/' | relative_url }}">Philosophy Schools</a>
+          <a href="{{ '/hindu-text-timeline/' | relative_url }}">Text Timeline</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="wrapper content" id="main-content">
+      {{ content }}
+
+      {% unless page.url == '/' %}
+      <p class="back-home"><a href="{{ '/' | relative_url }}">← Back to the home page</a></p>
+      {% endunless %}
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrapper">
+        <p>Educational collection on Hindu philosophy, traditions, teachers, and cosmology.</p>
+      </div>
+    </footer>
+  </body>
+</html>
