@@ -1,77 +1,227 @@
-(function () {
-  'use strict';
+:root {
+  --background: #fffdf8;
+  --surface: #ffffff;
+  --text: #292620;
+  --muted: #6e675d;
+  --border: #e4ded3;
+  --accent: #8a3b12;
+  --accent-dark: #5f270b;
+  --soft: #f7efe3;
+  --shadow: 0 8px 24px rgba(70, 50, 30, 0.08);
+}
 
-  if (window.__hinduSiteMermaidStarted) return;
-  window.__hinduSiteMermaidStarted = true;
+* { box-sizing: border-box; }
 
-  const diagramStart = /^(?:\s*%%[^\n]*\n)*\s*(flowchart|graph|sequenceDiagram|classDiagram|stateDiagram(?:-v2)?|erDiagram|journey|gantt|pie|quadrantChart|requirementDiagram|gitGraph|mindmap|timeline|zenuml|sankey-beta|xychart-beta|block-beta|packet-beta|architecture-beta|kanban)\b/;
+html { scroll-behavior: smooth; }
 
-  function isMermaidBlock(code) {
-    return (
-      code.classList.contains('language-mermaid') ||
-      code.classList.contains('lang-mermaid') ||
-      Boolean(code.closest('.language-mermaid')) ||
-      diagramStart.test(code.textContent.trim())
-    );
-  }
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--text);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 18px;
+  line-height: 1.7;
+}
 
-  function replaceCodeBlocks() {
-    const codeBlocks = Array.from(document.querySelectorAll('pre code')).filter(isMermaidBlock);
-    const diagrams = [];
+.wrapper {
+  width: min(1120px, calc(100% - 2rem));
+  margin: 0 auto;
+}
 
-    codeBlocks.forEach((code, index) => {
-      const source = code.textContent.trim();
-      const diagram = document.createElement('pre');
-      diagram.className = 'mermaid';
-      diagram.id = `mermaid-diagram-${index + 1}`;
-      diagram.textContent = source;
+.site-header {
+  background: #2b2118;
+  color: white;
+  border-bottom: 4px solid #c46a2c;
+}
 
-      const rougeWrapper = code.closest('.highlighter-rouge');
-      const pre = code.closest('pre');
-      const target = rougeWrapper || pre;
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  min-height: 76px;
+}
 
-      if (target) {
-        target.replaceWith(diagram);
-        diagrams.push(diagram);
-      }
-    });
+.site-title {
+  color: white;
+  text-decoration: none;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
 
-    return diagrams;
-  }
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
 
-  async function renderMermaid() {
-    const diagrams = replaceCodeBlocks();
-    if (!diagrams.length) return;
+nav a {
+  color: #fff4e6;
+  text-decoration: none;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.92rem;
+}
 
-    if (!window.mermaid) {
-      console.error('Mermaid library did not load. Check whether cdn.jsdelivr.net is blocked.');
-      return;
-    }
+nav a:hover, nav a:focus { text-decoration: underline; }
 
-    window.mermaid.initialize({
-      startOnLoad: false,
-      securityLevel: 'loose',
-      theme: 'default',
-      flowchart: {
-        htmlLabels: true,
-        useMaxWidth: true
-      }
-    });
+.content {
+  min-height: 70vh;
+  padding: 2.8rem 0 4rem;
+}
 
-    // Render one diagram at a time so one syntax error does not block the rest.
-    for (const diagram of diagrams) {
-      try {
-        await window.mermaid.run({ nodes: [diagram] });
-      } catch (error) {
-        diagram.classList.add('mermaid-render-error');
-        console.error(`Could not render ${diagram.id}:`, error);
-      }
-    }
-  }
+h1, h2, h3, h4 {
+  color: #3d2414;
+  line-height: 1.25;
+  scroll-margin-top: 1.5rem;
+}
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', renderMermaid, { once: true });
-  } else {
-    renderMermaid();
-  }
-})();
+h1 {
+  margin-top: 0;
+  font-size: clamp(2rem, 4vw, 3.35rem);
+}
+
+h2 {
+  margin-top: 2.4rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid var(--border);
+}
+
+h3 { margin-top: 2rem; }
+
+a { color: var(--accent); }
+a:hover, a:focus { color: var(--accent-dark); }
+
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+blockquote {
+  margin: 1.5rem 0;
+  padding: 0.8rem 1.2rem;
+  background: var(--soft);
+  border-left: 5px solid #c46a2c;
+}
+
+code {
+  font-family: Consolas, Monaco, monospace;
+  font-size: 0.9em;
+}
+
+pre {
+  overflow-x: auto;
+  padding: 1rem;
+  background: #28231e;
+  color: #f7f3ed;
+  border-radius: 8px;
+}
+
+.table-wrap, table {
+  width: 100%;
+}
+
+table {
+  display: block;
+  overflow-x: auto;
+  border-collapse: collapse;
+  margin: 1.25rem 0;
+  font-size: 0.95rem;
+}
+
+th, td {
+  padding: 0.65rem 0.8rem;
+  border: 1px solid var(--border);
+  vertical-align: top;
+}
+
+th { background: var(--soft); }
+
+.hero {
+  padding: clamp(1.4rem, 4vw, 3rem);
+  background: linear-gradient(135deg, #fff, #f7ead7);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+}
+
+.hero p {
+  max-width: 800px;
+  color: var(--muted);
+  font-size: 1.08rem;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+  margin: 1.25rem 0 2.5rem;
+}
+
+.card {
+  display: block;
+  padding: 1.25rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(70, 50, 30, 0.05);
+  text-decoration: none;
+}
+
+.card:hover, .card:focus {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+
+.card strong {
+  display: block;
+  margin-bottom: 0.4rem;
+  color: var(--accent-dark);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.05rem;
+}
+
+.card span {
+  display: block;
+  color: var(--muted);
+  font-size: 0.94rem;
+  line-height: 1.5;
+}
+
+.reading-path {
+  padding: 1rem 1.25rem;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.mermaid {
+  overflow-x: auto;
+  margin: 1.5rem 0;
+  padding: 1rem;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  text-align: center;
+}
+
+.back-home {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.site-footer {
+  padding: 1.5rem 0;
+  background: #2b2118;
+  color: #e7ded4;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.85rem;
+}
+
+@media (max-width: 720px) {
+  body { font-size: 16px; }
+  .header-inner { align-items: flex-start; flex-direction: column; padding: 1rem 0; }
+  nav { gap: 0.75rem; }
+  .content { padding-top: 1.5rem; }
+}
